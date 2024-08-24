@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { ICourse, storageDataIntoLocalStorage } from '../../utils';
+import React, { useEffect, useRef, useState } from 'react';
+import { generateUUID, ICourse } from '../../utils';
+import { useDispatch } from 'react-redux';
+import { addCourse } from '../../slice/CourseListSlice';
 
 interface CourseData {
   category: string;
@@ -15,13 +17,22 @@ const CSVReader: React.FC = () => {
   const [csvFile, setCSVFile] = useState<File | null>(null);
   const [csvArray, setCSVArray] = useState<ICourse[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (csvArray.length > 0) {
-      storageDataIntoLocalStorage(csvArray);
-      // const newCourseList = [...courseList, csvArray];
-      // setCourseList(newCourseList);
-      setCSVArray([]);
+      csvArray.forEach((course) => {
+        course.id = generateUUID();
+        dispatch(addCourse(course));
+      });
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+
+      setCSVFile(null);
     }
   }, [csvArray]);
 
@@ -105,6 +116,7 @@ const CSVReader: React.FC = () => {
             accept=".csv"
             id="csvFile"
             onChange={handleCSVFile}
+            ref={fileInputRef}
           />
           <br />
           <button

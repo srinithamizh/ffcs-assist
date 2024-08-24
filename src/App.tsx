@@ -6,19 +6,23 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import CourseList from './components/CourseList/CourseList';
 import HomeLayout from './layout/HomeLayout';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/ffcs-assist/" element={<HomeLayout />}>
-          <Route index path="/ffcs-assist/" element={<Home />} />
-          <Route path="/ffcs-assist/course-list" element={<CourseList />} />
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/ffcs-assist/" element={<HomeLayout />}>
+            <Route index path="/ffcs-assist/" element={<Home />} />
+            <Route path="/ffcs-assist/course-list" element={<CourseList />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 };
 

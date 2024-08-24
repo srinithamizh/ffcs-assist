@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { getRandomInteger, ICourse } from '../../utils';
+import { generateUUID, ICourse } from '../../utils';
+import { useDispatch } from 'react-redux';
+import { addCourse } from '../../slice/CourseListSlice';
 
 type formType =
   | 'form'
@@ -15,18 +17,12 @@ type formType =
 
 interface ICourseForm {
   editCourse?: ICourse | null;
-  setEditCourse: (course: ICourse | null) => void;
-  setCourseList: (courseList: ICourse[]) => void;
 }
-const CourseForm: React.FC<ICourseForm> = ({
-  editCourse,
-  setEditCourse,
-  setCourseList,
-}) => {
+const CourseForm: React.FC<ICourseForm> = ({ editCourse }) => {
   const { register, setValue, watch, reset } = useForm({
     defaultValues: {
       form: {
-        id: getRandomInteger(5, 10000, 99999),
+        id: generateUUID(),
         code: '',
         name: '',
         slot: '',
@@ -37,6 +33,8 @@ const CourseForm: React.FC<ICourseForm> = ({
       },
     },
   });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (editCourse) {
@@ -60,26 +58,9 @@ const CourseForm: React.FC<ICourseForm> = ({
   };
 
   const handleAddCourse = () => {
-    const storedCourses = localStorage.getItem('courseList');
-    let courseList: ICourse[] = storedCourses ? JSON.parse(storedCourses) : [];
-
-    const isDuplicate = courseList.some(
-      (item) =>
-        item.code === form.code &&
-        item.slot === form.slot &&
-        item.venue === form.venue
-    );
-
-    if (!isDuplicate) {
-      form.id = getRandomInteger(5, 10000, 99999);
-      courseList.push(form);
-      localStorage.setItem('courseList', JSON.stringify(courseList));
-      setCourseList(courseList);
-      setEditCourse(null);
-      reset();
-    } else {
-      console.log('Duplicate found, course not added.');
-    }
+    setValue('form.id', generateUUID());
+    dispatch(addCourse(form));
+    reset();
   };
 
   return (
@@ -176,7 +157,7 @@ const CourseForm: React.FC<ICourseForm> = ({
 
           <div className="col-12">
             <button
-              className="btn btn-primary-custom align-right"
+              className="btn btn-primary-custom align-right submit-button"
               onClick={handleAddCourse}
             >
               {editCourse ? 'Edit ' : 'Add '} Course

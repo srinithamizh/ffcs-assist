@@ -41,6 +41,22 @@
   border: 1px var(--main-bg-color) solid;
 }
 
+.toggle-button {
+  margin-top: -65px;
+}
+
+.btn-secondary-custom {
+  background-color: var(--main-bg-light-color);
+  color: var(--main-bg-color);
+  border: 1px solid var(--main-bg-color);
+}
+
+.btn-secondary-custom:hover {
+  background-color: var(--main-bg-color);
+  color: var(--main-bg-light-color);
+  border: 1px solid var(--main-bg-color);
+}
+
 .not-found-page-wrap {
   min-height: 100vh;
 }

@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CourseForm from '../CourseForm/CourseForm';
 import { ICourse } from '../../utils';
 import CSVReader from '../CSVReader/CSVReader';
+import { useDispatch, useSelector } from 'react-redux';
+import { Rootstate } from '../../store/store';
+import { deleteCourse } from '../../slice/CourseListSlice';
 
 const CourseList: React.FC = () => {
-  const [courseList, setCourseList] = useState<ICourse[]>([]);
+  const courseList = useSelector(
+    (state: Rootstate) => state.courses.courseList
+  );
+  const dispatch = useDispatch();
+
   const [editCourse, setEditCourse] = useState<ICourse | null>();
   const [isInUploadMode, setIsInUploadMode] = useState<boolean>(false);
 
-  useEffect(() => {
-    const storedCourses = localStorage.getItem('courseList');
-    let courses = storedCourses ? JSON.parse(storedCourses) : [];
-    setCourseList(courses);
-  }, []);
-
   const handleDelete = (course: ICourse) => {
-    const newCourseList = courseList.filter((item) => item.id !== course.id);
-    setCourseList(newCourseList);
-    localStorage.setItem('courseList', JSON.stringify(newCourseList));
+    dispatch(deleteCourse(course.id));
   };
 
   const handleEdit = (course: ICourse) => {
-    const newCourseList = courseList.filter((item) => item.id !== course.id);
-    setCourseList(newCourseList);
-    localStorage.setItem('courseList', JSON.stringify(newCourseList));
+    dispatch(deleteCourse(course.id));
     setEditCourse(course);
   };
 
@@ -38,20 +35,31 @@ const CourseList: React.FC = () => {
           <h5 className="card-title align-centered">Add Course</h5>
         </div>
         <div className="card-body">
+          {isInUploadMode && (
+            <a
+              className="link-primary-custom align-right"
+              href="/ffcs-assist/course_template.csv"
+            >
+              Download Template
+            </a>
+          )}
           {isInUploadMode ? (
             <div className="mt-5">
               <CSVReader />
             </div>
           ) : (
-            <CourseForm
-              editCourse={editCourse}
-              setEditCourse={setEditCourse}
-              setCourseList={setCourseList}
-            />
+            <CourseForm editCourse={editCourse} />
           )}
 
-          <button className="link-primary-custom" onClick={toggleMode}>
-            {isInUploadMode ? 'Add Course Manually' : 'Import Course'}
+          <button
+            className={
+              isInUploadMode
+                ? 'btn btn-secondary-custom'
+                : 'btn btn-secondary-custom toggle-button'
+            }
+            onClick={toggleMode}
+          >
+            {isInUploadMode ? 'Add Course Manually' : 'Import Course by File'}
           </button>
         </div>
       </div>
@@ -61,7 +69,7 @@ const CourseList: React.FC = () => {
           <h5 className="card-title align-centered">Course List</h5>
         </div>
         <div className="card-body">
-          {courseList &&
+          {courseList.length > 0 ? (
             courseList.map((course) => (
               <div className="list-group mb-2" key={course.id}>
                 <div
@@ -109,7 +117,10 @@ const CourseList: React.FC = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <h5 className="align-centered">No Course Found!</h5>
+          )}
         </div>
       </div>
     </>
