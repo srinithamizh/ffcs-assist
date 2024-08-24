@@ -11,11 +11,12 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomeLayout />}>
-          <Route index element={<Home />} />
-          <Route path="/course-list" element={<CourseList />} />
+        <Route path="/ffcs-assist/" element={<HomeLayout />}>
+          <Route index path="/ffcs-assist/" element={<Home />} />
+          <Route path="/ffcs-assist/course-list" element={<CourseList />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

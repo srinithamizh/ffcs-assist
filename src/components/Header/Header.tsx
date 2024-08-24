@@ -7,12 +7,12 @@ const Header: React.FC = () => {
     {
       id: 1,
       name: 'Home',
-      link: '/',
+      link: '/ffcs-assist',
     },
     {
       id: 2,
       name: 'Course List',
-      link: '/course-list',
+      link: '/ffcs-assist/course-list',
     },
   ];
   return (
@@ -39,7 +39,9 @@ const Header: React.FC = () => {
                 <li className="nav-item" key={item.id}>
                   <NavLink
                     className={({ isActive }) =>
-                      isActive ? 'nav-link active' : 'nav-link'
+                      isActive && window.location.pathname === item.link
+                        ? 'nav-link active'
+                        : 'nav-link'
                     }
                     aria-current="page"
                     to={item.link}
