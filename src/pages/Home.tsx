@@ -1,9 +1,10 @@
 import React from 'react';
+import Timetable from '../components/Timetable/Timetable';
 
 const Home: React.FC = () => {
   return (
     <>
-      <h1 className="display-centered">Assisting Soon...</h1>
+      <Timetable />
     </>
   );
 };

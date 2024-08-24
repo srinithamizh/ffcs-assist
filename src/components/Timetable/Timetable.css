@@ -1,0 +1,28 @@
+.table {
+    text-align: center;
+    cursor: pointer;
+}
+
+.table-heading {
+    background-color: var(--main-bg-color);
+    color: var(--main-bg-light-color);
+}
+
+.theory-timing {
+    background-color: #CCCCFF;
+}
+
+.lab-timing {
+    background-color: #99CCFF;
+}
+
+.time-table {
+    width: 100%;
+
+}
+
+@media (max-width: 768px) {
+    .time-table {
+        overflow-x: scroll;
+    }
+}
