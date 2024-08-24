@@ -22,8 +22,8 @@ const CSVReader: React.FC<ICSVReader> = ({ courseList, setCourseList }) => {
   useEffect(() => {
     if (csvArray.length > 0) {
       storageDataIntoLocalStorage(csvArray);
-      const newCourseList = [...courseList, csvArray];
-      setCourseList(newCourseList);
+      // const newCourseList = [...courseList, csvArray];
+      // setCourseList(newCourseList);
       setCSVArray([]);
     }
   }, [csvArray]);
