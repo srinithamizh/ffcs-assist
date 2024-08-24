@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import CourseForm from '../CourseForm/CourseForm';
 import { ICourse } from '../../utils';
+import CSVReader from '../CSVReader/CSVReader';
 
 const CourseList: React.FC = () => {
   const [courseList, setCourseList] = useState<ICourse[]>([]);
   const [editCourse, setEditCourse] = useState<ICourse | null>();
+  const [isInUploadMode, setIsInUploadMode] = useState<boolean>(false);
 
   useEffect(() => {
     const storedCourses = localStorage.getItem('courseList');
@@ -25,18 +27,43 @@ const CourseList: React.FC = () => {
     setEditCourse(course);
   };
 
+  const toggleMode = () => {
+    setIsInUploadMode(!isInUploadMode);
+  };
+
   return (
     <>
-      <div className="row">
-        <div className="col-md-6 mt-4">
-          <CourseForm
-            editCourse={editCourse}
-            setEditCourse={setEditCourse}
-            setCourseList={setCourseList}
-          />
+      <div className="card mt-4">
+        <div className="card-header">
+          <h5 className="card-title align-centered">Add Course</h5>
         </div>
-        <div className="col-md-6 mt-4">
-          <h3 className="justify-center">Course List</h3>
+        <div className="card-body">
+          {isInUploadMode ? (
+            <div className="mt-5">
+              <CSVReader
+                courseList={courseList}
+                setCourseList={setCourseList}
+              />
+            </div>
+          ) : (
+            <CourseForm
+              editCourse={editCourse}
+              setEditCourse={setEditCourse}
+              setCourseList={setCourseList}
+            />
+          )}
+
+          <button className="link-primary-custom" onClick={toggleMode}>
+            {isInUploadMode ? 'Add Course Manually' : 'Import Course'}
+          </button>
+        </div>
+      </div>
+
+      <div className="card mt-4 mb-2">
+        <div className="card-header">
+          <h5 className="card-title align-centered">Course List</h5>
+        </div>
+        <div className="card-body">
           {courseList &&
             courseList.map((course) => (
               <div className="list-group mb-2" key={course.id}>

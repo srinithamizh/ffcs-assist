@@ -9,10 +9,26 @@
   flex: 1;
 }
 
+.align-centered {
+  text-align: center;
+}
+
+.align-right {
+  float: right;
+}
+
 .btn-primary-custom,
 .bg-primary-custom {
   background-color: var(--main-bg-color);
   color: var(--main-bg-light-color);
+}
+
+.link-primary-custom {
+  color: var(--main-bg-color);
+  text-decoration: none;
+  font-weight: 500;
+  background: none;
+  border: none;
 }
 
 .custom-badge {
@@ -22,8 +38,7 @@
 .btn-primary-custom:hover {
   background-color: var(--main-bg-light-color);
   color: var(--main-bg-color);
-  border: 2px var(--main-bg-color) solid;
-  font-weight: bold;
+  border: 1px var(--main-bg-color) solid;
 }
 
 .not-found-page-wrap {

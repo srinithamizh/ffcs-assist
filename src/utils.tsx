@@ -16,3 +16,25 @@ export interface ICourse {
   venue: string;
   credit: string;
 }
+
+export const storageDataIntoLocalStorage = (courseData: ICourse[]) => {
+  const storedCourses = localStorage.getItem('courseList');
+  let courseList: ICourse[] = storedCourses ? JSON.parse(storedCourses) : [];
+
+  courseData.forEach((course) => {
+    const isDuplicate = courseList.some(
+      (item) =>
+        item.code === course.code &&
+        item.slot === course.slot &&
+        item.venue === course.venue
+    );
+
+    if (!isDuplicate) {
+      course.id = getRandomInteger(5, 10000, 99999);
+      courseList.push(course);
+      localStorage.setItem('courseList', JSON.stringify(courseList));
+    } else {
+      console.log('Duplicate found, course not added.');
+    }
+  });
+};

@@ -85,8 +85,7 @@ const CourseForm: React.FC<ICourseForm> = ({
   return (
     <>
       <div>
-        <h3>Add Course</h3>
-        <div className="row g-3 mt-3">
+        <div className="row g-3">
           <div className="col-md-3">
             <label htmlFor="inputCourseCategory" className="form-label">
               Course Category
@@ -177,7 +176,7 @@ const CourseForm: React.FC<ICourseForm> = ({
 
           <div className="col-12">
             <button
-              className="btn btn-primary-custom"
+              className="btn btn-primary-custom align-right"
               onClick={handleAddCourse}
             >
               {editCourse ? 'Edit ' : 'Add '} Course
