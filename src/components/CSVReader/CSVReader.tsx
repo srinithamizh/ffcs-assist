@@ -10,11 +10,8 @@ interface CourseData {
   credit: string;
   venue: string;
 }
-interface ICSVReader {
-  courseList: ICourse[];
-  setCourseList: (course: ICourse[]) => void;
-}
-const CSVReader: React.FC<ICSVReader> = ({ courseList, setCourseList }) => {
+
+const CSVReader: React.FC = () => {
   const [csvFile, setCSVFile] = useState<File | null>(null);
   const [csvArray, setCSVArray] = useState<ICourse[]>([]);
   const [error, setError] = useState<string | null>(null);
