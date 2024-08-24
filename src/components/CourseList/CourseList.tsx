@@ -40,10 +40,7 @@ const CourseList: React.FC = () => {
         <div className="card-body">
           {isInUploadMode ? (
             <div className="mt-5">
-              <CSVReader
-                courseList={courseList}
-                setCourseList={setCourseList}
-              />
+              <CSVReader />
             </div>
           ) : (
             <CourseForm
