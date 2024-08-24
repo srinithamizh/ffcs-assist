@@ -1,4 +1,4 @@
-@charset "UTF-8";/*!
+@charset "UTF-8";.table{text-align:center;cursor:pointer}.table-heading{background-color:var(--main-bg-color);color:var(--main-bg-light-color)}.theory-timing{background-color:#ccf}.lab-timing{background-color:#9cf}.time-table{width:100%}@media (max-width: 768px){.time-table{overflow-x:scroll}}/*!
 * Bootstrap Icons v1.11.3 (https://icons.getbootstrap.com/)
 * Copyright 2019-2024 The Bootstrap Authors
 * Licensed under MIT (https://github.com/twbs/icons/blob/main/LICENSE)
