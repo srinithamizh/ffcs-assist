@@ -1,0 +1,41 @@
+@import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --main-bg-color: #023e8a;
+  --main-bg-light-color: #f1faee;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.btn-primary-custom,
+.bg-primary-custom {
+  background-color: var(--main-bg-color);
+  color: var(--main-bg-light-color);
+}
+
+.custom-badge {
+  border: none;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--main-bg-light-color);
+  color: var(--main-bg-color);
+  border: 2px var(--main-bg-color) solid;
+  font-weight: bold;
+}
+
+.not-found-page-wrap {
+  min-height: 100vh;
+}
+
+.tagline {
+  margin-bottom: 0px;
+}
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    margin-top: 10px;
+  }
+}

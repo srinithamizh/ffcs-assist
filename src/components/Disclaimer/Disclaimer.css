@@ -1,0 +1,17 @@
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.modal-dialog-centered, .display-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 1rem);
+}
+
+.text-aligned-justify {
+    text-align: justify;
+}

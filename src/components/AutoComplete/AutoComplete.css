@@ -1,0 +1,27 @@
+/* Autocomplete.css */
+.autocomplete-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .autocomplete-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc; /* Add border to match Bootstrap styles */
+    border-radius: 0.25rem; /* Match Bootstrap border radius */
+    background-color: #fff; /* Ensure dropdown background is white */
+  }
+  
+  .autocomplete-dropdown .list-group-item {
+    cursor: pointer;
+  }
+  
+  .autocomplete-dropdown .list-group-item:hover {
+    background-color: #f8f9fa; /* Highlight color on hover */
+  }
+  
