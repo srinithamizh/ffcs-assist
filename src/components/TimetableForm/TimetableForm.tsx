@@ -93,16 +93,16 @@ const TimetableForm: React.FC = () => {
               />
             </div>
           </div>
-          <div className="row mt-5">
+          <div className="row mt-5 ">
             {filteredCourse &&
               filteredCourse.map((course) => (
                 <div
-                  className="col-md-3 list-group mb-2"
+                  className="col-md-3 list-group mb-2 d-flex "
                   key={course.id}
                   onDoubleClick={() => addCourse(course)}
                 >
                   <div
-                    className="list-group-item list-group-item-action"
+                    className="h-100 list-group-item list-group-item-action"
                     aria-current="true"
                   >
                     <div className="d-flex w-100 justify-content-between">

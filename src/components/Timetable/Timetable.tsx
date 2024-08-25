@@ -3,6 +3,7 @@ import timetableData from '../../timetable-schema/vellore.json';
 import './Timetable.css';
 import { useSelector } from 'react-redux';
 import { Rootstate } from '../../store/store';
+import html2canvas from 'html2canvas-pro';
 
 const Timetable: React.FC = () => {
   const daysOfWeek = ['mon', 'tue', 'wed', 'thu', 'fri'];
@@ -29,9 +30,26 @@ const Timetable: React.FC = () => {
     return slot;
   };
 
+  const downloadTimetable = () => {
+    html2canvas(document.getElementById('timetable')!, {}).then(function (
+      canvas
+    ) {
+      var link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'timetable-image.png';
+      link.click();
+    });
+  };
+
   return (
     <div className="container mt-5 ">
       <h3 className="align-centered">Time Table</h3>
+      <button
+        className="btn btn-primary-custom align-right mb-2"
+        onClick={downloadTimetable}
+      >
+        Download
+      </button>
       <div className="table-reponsive-lg time-table">
         <table className="table table-bordered table-equal" id="timetable">
           <thead>
