@@ -1,4 +1,14 @@
 category,code,name,slot,faculty,venue,credit
 PC,SWE1001,Software Engineering,a1+ta1,faculty1,sjt121,3
-PC,SWE1001,Software Engineering,a1+ta1,faculty2,sjt122,3
-PC,SWE1001,Software Engineering,a1+ta1,faculty3,sjt123,3
+PC,SWE1002,Requirements Engineering,b1+tb1,faculty2,sjt122,4
+PC,SWE1003,Software Architecture and Design,c1+tc1,faculty3,sjt123,3
+PC,SWE1004,Software Construction and Maintenance,d1+td1,faculty4,sjt124,4
+PE,SWE2001,Operating System,e1+te1,faculty5,sjt125,3
+PE,SWE2002,Computer Networks,f1+tf1,faculty6,sjt126,3
+PE,SWE2003,Web Technologies,a2+ta2,faculty7,sjt127,3
+PE,SWE2004,Agile Development,b2+tb2,faculty8,sjt128,3
+PE,SWE2005,System Design,c2+tc2,faculty9,sjt129,4
+PE,SWE2006,Object Oriented Analysis and Design,d2+td2,faculty10,sjt130,4
+PE,SWE2007,Software Testing,e2+te2,faculty11,sjt131,3
+PE,SWE2008,Human Resource Interaction,f2+tf2,faculty12,sjt132,3
+PC,CSE1001,python programming,L31+l32,faculty13,sjt134,4
