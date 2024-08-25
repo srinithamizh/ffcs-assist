@@ -14,8 +14,8 @@ const App: React.FC = () => {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/ffcs-assist/" element={<HomeLayout />}>
-            <Route index path="/ffcs-assist/" element={<Home />} />
+          <Route path="/ffcs-assist" element={<HomeLayout />}>
+            <Route index path="/ffcs-assist" element={<Home />} />
             <Route path="/ffcs-assist/course-list" element={<CourseList />} />
             <Route path="*" element={<NotFound />} />
           </Route>

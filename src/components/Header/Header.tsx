@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     <div>
       <nav className="navbar navbar-expand-lg" id="navbar_header">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/ffcs-assist">
             <strong>FFCS Assist</strong>
           </Link>
           <button
