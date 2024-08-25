@@ -8,12 +8,14 @@ import {
 interface ICourseState {
   courseList: ICourse[];
   registeredCourse: any;
+  registeredCourseSlot: string[];
   status: 'idle' | 'loading' | 'success';
   error: null | string;
 }
 const initialState: ICourseState = {
   courseList: getDataFromLocalStorage(),
   registeredCourse: {},
+  registeredCourseSlot: [],
   status: 'idle',
   error: null,
 };
@@ -50,6 +52,9 @@ const CourseListSlice = createSlice({
         state.registeredCourse[
           slot
         ] = `${slot} ${course.code} ${course.name} ${course.faculty}`;
+        if (!state.registeredCourseSlot.includes(slot)) {
+          state.registeredCourseSlot.push(slot);
+        }
       });
     },
   },

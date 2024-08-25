@@ -10,6 +10,16 @@ const Timetable: React.FC = () => {
   const registeredCourse = useSelector(
     (state: Rootstate) => state.courses.registeredCourse
   );
+
+  const registeredCourseSlot = useSelector(
+    (state: Rootstate) => state.courses.registeredCourseSlot
+  );
+
+  const checkSlotIsRegistered = (slot: string) => {
+    console.log(registeredCourseSlot);
+    return registeredCourseSlot.includes(slot);
+  };
+
   type courseKey = keyof typeof registeredCourse;
 
   const checkRegisteredCourseBySlot = (slot: courseKey | string): any => {
@@ -23,17 +33,23 @@ const Timetable: React.FC = () => {
     <div className="container mt-5 ">
       <h3 className="align-centered">Time Table</h3>
       <div className="table-reponsive-lg time-table">
-        <table className="table table-bordered" id="timetable">
+        <table className="table table-bordered table-equal" id="timetable">
           <thead>
             <tr>
               <th className="table-heading">THEORY</th>
               {timetableData.theory.map((theory, index) => (
                 <th className="theory-timing" key={`theory-${index}`}>
-                  {theory.placeholder
-                    ? ''
-                    : theory.start
-                    ? `${theory.start} \n ${theory.end}`
-                    : 'Lunch'}
+                  {theory.placeholder ? (
+                    ''
+                  ) : theory.start ? (
+                    <p>
+                      {theory.start}
+                      <br />
+                      {theory.end}
+                    </p>
+                  ) : (
+                    'LUNCH'
+                  )}
                 </th>
               ))}
             </tr>
@@ -41,11 +57,17 @@ const Timetable: React.FC = () => {
               <th className="table-heading">LAB</th>
               {timetableData.lab.map((lab, index) => (
                 <th className="lab-timing" key={`lab-${index}`}>
-                  {lab.placeholder
-                    ? ''
-                    : lab.start
-                    ? `${lab.start} \n ${lab.end}`
-                    : 'Lunch'}
+                  {lab.placeholder ? (
+                    ''
+                  ) : lab.start ? (
+                    <p>
+                      {lab.start}
+                      <br />
+                      {lab.end}
+                    </p>
+                  ) : (
+                    'LUNCH'
+                  )}
                 </th>
               ))}
             </tr>
@@ -57,7 +79,11 @@ const Timetable: React.FC = () => {
                   </th>
                   {timetableData.theory.map((theory: any, theoryIndex) => (
                     <td
-                      className="class-highlight"
+                      className={
+                        theory.days && checkSlotIsRegistered(theory.days[day])
+                          ? 'register-class'
+                          : 'class-highlight'
+                      }
                       key={`theory-${day}-${theoryIndex}`}
                     >
                       {theory.days &&
@@ -68,10 +94,14 @@ const Timetable: React.FC = () => {
                 <tr>
                   {timetableData.lab.map((lab: any, labIndex) => (
                     <td
-                      className="lab-highlight"
+                      className={
+                        lab.days && checkSlotIsRegistered(lab.days[day])
+                          ? 'register-class'
+                          : 'lab-highlight'
+                      }
                       key={`lab-${day}-${labIndex}`}
                     >
-                      {lab.days && lab.days[day]}
+                      {lab.days && checkRegisteredCourseBySlot(lab.days[day])}
                     </td>
                   ))}
                 </tr>

@@ -31,6 +31,10 @@
     width: 100%;
 }
 
+#timetable .register-class {
+    background-color: #ade8f4;
+}
+
 #timetable .class-highlight:hover {
     background-color: #ade8f4;
 }
