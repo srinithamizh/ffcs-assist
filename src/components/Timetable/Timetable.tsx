@@ -1,15 +1,29 @@
 import React from 'react';
 import timetableData from '../../timetable-schema/vellore.json';
 import './Timetable.css';
+import { useSelector } from 'react-redux';
+import { Rootstate } from '../../store/store';
 
 const Timetable: React.FC = () => {
   const daysOfWeek = ['mon', 'tue', 'wed', 'thu', 'fri'];
+
+  const registeredCourse = useSelector(
+    (state: Rootstate) => state.courses.registeredCourse
+  );
+  type courseKey = keyof typeof registeredCourse;
+
+  const checkRegisteredCourseBySlot = (slot: courseKey | string): any => {
+    if (typeof slot && slot in registeredCourse) {
+      return registeredCourse[slot as courseKey];
+    }
+    return slot;
+  };
 
   return (
     <div className="container mt-5 ">
       <h3 className="align-centered">Time Table</h3>
       <div className="table-reponsive-lg time-table">
-        <table className="table table-bordered ">
+        <table className="table table-bordered" id="timetable">
           <thead>
             <tr>
               <th className="table-heading">THEORY</th>
@@ -42,14 +56,21 @@ const Timetable: React.FC = () => {
                     {day.toUpperCase()}
                   </th>
                   {timetableData.theory.map((theory: any, theoryIndex) => (
-                    <td key={`theory-${day}-${theoryIndex}`}>
-                      {theory.days && theory.days[day]}
+                    <td
+                      className="class-highlight"
+                      key={`theory-${day}-${theoryIndex}`}
+                    >
+                      {theory.days &&
+                        checkRegisteredCourseBySlot(theory.days[day])}
                     </td>
                   ))}
                 </tr>
                 <tr>
                   {timetableData.lab.map((lab: any, labIndex) => (
-                    <td key={`lab-${day}-${labIndex}`}>
+                    <td
+                      className="lab-highlight"
+                      key={`lab-${day}-${labIndex}`}
+                    >
                       {lab.days && lab.days[day]}
                     </td>
                   ))}

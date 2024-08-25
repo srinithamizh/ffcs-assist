@@ -1,27 +1,54 @@
 .table {
-    text-align: center;
+    text-align: center; 
     cursor: pointer;
+    font-size: 16px;
 }
 
-.table-heading {
-    background-color: var(--main-bg-color);
+#timetable th, #timetable td {
+    vertical-align: middle;
+}
+
+.table-bordered>:not(caption)>*>* {
+    border: 2px solid #03045e !important;
+}
+
+#timetable .table-heading {
+    background-color: #023e8a;
     color: var(--main-bg-light-color);
 }
 
-.theory-timing {
-    background-color: #CCCCFF;
+#timetable .theory-timing {
+    background-color: #0077b6 ;
+    color: var(--main-bg-light-color);
 }
 
-.lab-timing {
-    background-color: #99CCFF;
+#timetable .lab-timing {
+    background-color: #00b4d8;
+    color: var(--main-bg-light-color);
 }
 
-.time-table {
+#timetable .time-table {
     width: 100%;
-
 }
+
+#timetable .class-highlight:hover {
+    background-color: #ade8f4;
+}
+
+#timetable .lab-highlight:hover {
+    background-color: #90e0ef;
+}
+
 
 @media (max-width: 768px) {
+    .table {
+        font-size: 12px;
+    }
+    
+    #timetable th, #timetable td {
+        padding: 10px ;
+    }
+
     .time-table {
         overflow-x: scroll;
     }

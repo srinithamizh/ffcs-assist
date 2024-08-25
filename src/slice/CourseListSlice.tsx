@@ -7,11 +7,13 @@ import {
 
 interface ICourseState {
   courseList: ICourse[];
+  registeredCourse: any;
   status: 'idle' | 'loading' | 'success';
   error: null | string;
 }
 const initialState: ICourseState = {
   courseList: getDataFromLocalStorage(),
+  registeredCourse: {},
   status: 'idle',
   error: null,
 };
@@ -40,8 +42,19 @@ const CourseListSlice = createSlice({
       );
       localStorage.setItem('courseList', JSON.stringify(state.courseList));
     },
+    registerCourse: (state, action) => {
+      const course = action.payload;
+      const slots = course.slot.split('+');
+
+      slots.forEach((slot: string) => {
+        state.registeredCourse[
+          slot
+        ] = `${slot} ${course.code} ${course.name} ${course.faculty}`;
+      });
+    },
   },
 });
 
-export const { addCourse, deleteCourse } = CourseListSlice.actions;
+export const { addCourse, deleteCourse, registerCourse } =
+  CourseListSlice.actions;
 export default CourseListSlice.reducer;
